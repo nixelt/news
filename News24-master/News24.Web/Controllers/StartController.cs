@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using News24.Model;
 using News24.Service;
+using News24.Service.Infrastructure;
 using News24.Web.Models;
 using News24.Web.ViewModels.ArticleViewModel;
 using News24.Web.ViewModels.StartViewModels;
@@ -134,7 +135,6 @@ namespace News24.Web.Controllers
             return PartialView("_MostPopular", model);
         }
 
-
         [ChildActionOnly]
         public ActionResult GetTrendings(int way)
         {
@@ -168,6 +168,55 @@ namespace News24.Web.Controllers
                 Categories = mappCategories
             };
             return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Find(FindArticlesViewModel model)
+        {
+            if (model == null)
+            {
+                model = new FindArticlesViewModel();
+            }
+
+            var filterModel = new ArticleFilterModel();
+
+            filterModel.MaxDate = model.MaxDate.HasValue ? model.MaxDate.Value :
+                model.MinDate.HasValue ? model.MinDate.Value : DateTime.Now;
+
+            filterModel.MinDate = model.MinDate.HasValue ? model.MinDate.Value :
+                model.MaxDate.HasValue ? model.MaxDate.Value : DateTime.Now;
+
+            if (model.Category.HasValue)
+            {
+                filterModel.Categories = filterModel.Categories.Append(model.Category.Value);
+            }
+
+            var articles = _articleService.Find(filterModel, (model.Page - 1) * _pageSize,_pageSize);
+
+            model.Articles = Mapper.Map<IEnumerable<Article>, IEnumerable<ArticleViewModel>>(articles);
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult GetByKeyWord(string keyWord)
+        {
+
+            var articles = _articleService.GetArticlesByKeyWord(keyWord);
+
+            var result = Mapper.Map<IEnumerable<Article>, IEnumerable<ArticleViewModel>>(articles);
+
+            return View(result);
+        }
+
+        [HttpPost]
+        public ActionResult AutocompleteSearch(string keyWord)
+        {
+            var articles = _articleService.GetArticlesByKeyWord(keyWord).Take(5);
+
+            var result = Mapper.Map<IEnumerable<Article>, IEnumerable<ArticleViewModel>>(articles);
+
+            return PartialView(result);
         }
     }
 }
