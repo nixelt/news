@@ -1,0 +1,50 @@
+﻿@model News24.Web.ViewModels.StartViewModels.IndexViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid paddding mb-5">
+    <div class="container">
+        <div class="row mx-0">
+            @Html.Partial("_LastArticles", Model)
+        </div>
+    </div>
+</div>
+<div class="container-fluid pt-3">
+    <div class="container animate-box" data-animate-effect="fadeIn">
+        <a name="trend"></a>
+        @Html.Action("GetTrendings", "Start", new { way = 1 })
+    </div>
+</div>
+@using (Ajax.BeginForm("GetArticles", new AjaxOptions { UpdateTargetId = "results" }))
+{
+    @Html.HiddenFor(m => m.Category)
+    <div class="container-fluid pb-4 pt-4 paddding">
+        <div class="container paddding">
+            <div class="row mx-0">
+                <div class="col-md-8 animate-box" data-animate-effect="fadeInLeft">
+                    <div>
+                        <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4">Новости</div>
+                    </div>
+                    <div id="results">
+                        @Html.Partial("_Articles", Model)
+                    </div>
+
+
+                </div>
+
+                <div class="col-md-3 animate-box" data-animate-effect="fadeInRight">
+                    @Html.Partial("_Tags", Model.Categories)
+
+
+                    @Html.Action("GetMostPopular", "Start")
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+
+

@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    var user = User.Identity.GetUserId();
+}
+@if (User.Identity.IsAuthenticated)
+{
+    <div clas="col-md-12">
+        <a href="@Url.Action("Index","Manage")" class="color_fff fh5co_mediya_setting">
+            <i class="fa fa-user-md"></i> Профиль
+        </a>
+    </div>
+    if (User.IsInRole("Admin"))
+    {
+        <div clas="col-md-12">
+            <a href="@Url.Action("Index","Home", new { Area = "Admin" })" class="color_fff fh5co_mediya_setting">
+                Админ панель
+            </a>
+        </div>
+    }
+}
+else
+{
+    <div class="row">
+        <div clas="col-md-5" style="margin-right: 5px;">
+            <a href="@Url.Action("Login","Account")" class="color_fff fh5co_mediya_setting">
+                <i class="fa fa-user-md"></i> Войти
+            </a>
+        </div>
+        <div clas="col-md-5">
+            <a href="@Url.Action("Register","Account")" class="color_fff fh5co_mediya_setting">
+                <i class="fa fa-user-circle"></i> Регистрация
+            </a>
+        </div>
+    </div>
+
+}

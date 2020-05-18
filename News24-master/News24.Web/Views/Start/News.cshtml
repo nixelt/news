@@ -1,0 +1,34 @@
+﻿@model News24.Web.ViewModels.StartViewModels.IndexViewModel
+@using News24.Web.Helpers
+@{
+    ViewBag.Title = "Новости";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+@using (Ajax.BeginForm("GetArticles", new AjaxOptions { UpdateTargetId = "results" }))
+{
+    <div class="container-fluid pb-4 pt-4 paddding">
+        <div class="container paddding">
+            <div class="row mx-0">
+                <div class="col-md-8 animate-box" data-animate-effect="fadeInLeft">
+                    <div>
+                        <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4">Новости</div>
+                    </div>
+
+                    <a name="news"></a>
+                    <div id="results">
+                        @Html.Partial("_Articles", Model)
+                    </div>
+
+
+                </div>
+
+                <div class="col-md-3 animate-box" data-animate-effect="fadeInRight">
+                    @Html.Partial("_Tags", Model.Categories)
+                    @Html.Action("GetMostPopular", "Start")
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
