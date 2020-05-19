@@ -1,4 +1,5 @@
-﻿@model News24.Web.ViewModels.StartViewModels.IndexViewModel
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@model News24.Web.ViewModels.StartViewModels.IndexViewModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -35,8 +36,8 @@
                 </div>
 
                 <div class="col-md-3 animate-box" data-animate-effect="fadeInRight">
-                    @Html.Partial("_Tags", Model.Categories)
-
+                    @Html.Partial("_Categories", Model.Categories)
+                    @Html.Partial("_Tags", Model.Tags)
 
                     @Html.Action("GetMostPopular", "Start")
 

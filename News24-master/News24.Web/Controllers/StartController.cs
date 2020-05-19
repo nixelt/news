@@ -18,18 +18,21 @@ namespace News24.Web.Controllers
     {
         private readonly IArticleService _articleService;
         private readonly ICategoryService _categoryService;
+        private readonly ITagService _tagService;
         private const int _pageSize = 4;
 
-        public StartController(IArticleService articleService, ICategoryService categoryService)
+        public StartController(IArticleService articleService, ICategoryService categoryService, ITagService tagService)
         {
             _articleService = articleService;
             _categoryService = categoryService;
+            _tagService = tagService;
         }
         // GET: Home
         [HttpGet]
         public ActionResult Index(int page = 1)
         {
             var categories = _categoryService.GetCategories();
+            var tags = _tagService.GetDistinctTags();
             var articles = _articleService.GetArticles();
             var mappCategories = categories.Select(Mapper.Map<Category, CategoryViewModel>).ToList();
             var mappArticles = articles.Select(Mapper.Map<Article, ArticleViewModel>).Skip((page - 1) * _pageSize).Take(_pageSize).Reverse().ToList();
@@ -38,6 +41,7 @@ namespace News24.Web.Controllers
             var model = new IndexViewModel
             {
                 Articles = mappArticles,
+                Tags = tags,
                 LastArticles = mappLastArticles,
                 Categories = mappCategories,
                 Pager = pager
@@ -46,7 +50,7 @@ namespace News24.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult GetArticles( int page = 1, string category = null)
+        public ActionResult GetArticles(int page = 1, string category = null)
         {
             if (!String.IsNullOrEmpty(category))
             {
@@ -98,6 +102,7 @@ namespace News24.Web.Controllers
         public ActionResult Details(int id)
         {
             var article = _articleService.GetArticle(id);
+            _articleService.AddView(article);
             var model = Mapper.Map<Article, ArticleDetailsViewModel>(article);
 
             return View(model);
@@ -112,6 +117,14 @@ namespace News24.Web.Controllers
         }
 
         [ChildActionOnly]
+        public ActionResult GetTags()
+        {
+            var tags = _tagService.GetDistinctTags();
+            var model = tags.Select(x => new KeyValuePair<int, string>(x.TagId, x.Value));
+            return PartialView("_LastPosted", model);
+        }
+
+        [ChildActionOnly]
         public ActionResult GetCategories()
         {
             var categories = _categoryService.GetCategories();
@@ -120,26 +133,18 @@ namespace News24.Web.Controllers
         }
 
         [ChildActionOnly]
-        public ActionResult GetTags()
-        {
-            var categories = _categoryService.GetCategories();
-            var model = categories.Select(Mapper.Map<Category, CategoryViewModel>).ToList();
-            return PartialView("_Tags", model);
-        }
-
-        [ChildActionOnly]
         public ActionResult GetMostPopular()
         {
-            var articles = _articleService.GetArticles();
-            var model = articles.Select(Mapper.Map<Article, ArticleViewModel>).OrderByDescending(x => x.PublicationDate).Take(6).ToList();
+            var articles = _articleService.GetPopular();
+            var model = articles.Select(Mapper.Map<Article, ArticleViewModel>).Take(6).ToList();
             return PartialView("_MostPopular", model);
         }
 
         [ChildActionOnly]
         public ActionResult GetTrendings(int way)
         {
-            var articles = _articleService.GetArticles();
-            var model = articles.Select(Mapper.Map<Article, ArticleViewModel>).OrderByDescending(x => x.PublicationDate).Take(12).ToList();
+            var articles = _articleService.GetPopular();
+            var model = articles.Select(Mapper.Map<Article, ArticleViewModel>).Take(12).ToList();
             if (way == 1)
             {
                 return PartialView("_InTrend", model);
@@ -191,7 +196,7 @@ namespace News24.Web.Controllers
                 filterModel.Categories = filterModel.Categories.Append(model.Category.Value);
             }
 
-            var articles = _articleService.Find(filterModel, (model.Page - 1) * _pageSize,_pageSize);
+            var articles = _articleService.Find(filterModel, (model.Page - 1) * _pageSize, _pageSize);
 
             model.Articles = Mapper.Map<IEnumerable<Article>, IEnumerable<ArticleViewModel>>(articles);
 

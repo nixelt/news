@@ -17,6 +17,7 @@ namespace News24.Model
 
         public DateTime PublicationDate { get; set; }
 
+        public long Views { get; set; }
 
         public string UserId { get; set; }
 

@@ -26,5 +26,7 @@ namespace News24.Web.ViewModels.ArticleViewModel
         public ContactInfoViewModel User { get; set; }
 
         public  ArticleCategoryViewModel Category { get; set; }
+
+        public long Views { get; set; }
     }
 }

@@ -18,8 +18,11 @@ namespace News24.Service
         void Delete(Tag tag);
 
         List<Tag> GetTags(int articleId);
-         
+
+        List<Tag> GetDistinctTags();
+
         Tag GetTag(int id);
+
     }
     public class TagService : ITagService
     {
@@ -54,7 +57,9 @@ namespace News24.Service
             _unitOfWork.Commit();
         }
 
-        public List<Tag> GetTags(int articleId) => _tagRepository.GetAll().Where(x=>x.ArticleId == articleId).ToList();
+        public List<Tag> GetTags(int articleId) => _tagRepository.GetAll().Where(x => x.ArticleId == articleId).ToList();
+
+        public List<Tag> GetDistinctTags() => _tagRepository.GetAll().GroupBy(x => x.Value).Select(x => x.First()).Distinct().ToList();
 
         public Tag GetTag(int id) => _tagRepository.GetById(id);
     }

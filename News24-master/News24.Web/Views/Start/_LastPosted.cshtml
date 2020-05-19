@@ -4,8 +4,7 @@
     <div class="footer_main_title py-3"> Последние статьи</div>
     @foreach (var item in Model)
     {
-
-        <a href="@Url.Action("Details","Start")" class="footer_img_post_6"><img src="data:image/jpeg;base64,@Convert.ToBase64String(item.MainImage)" alt="@item.Head" /></a>
+        <a href="@Url.Action("Details","Start")" class="footer_img_post_6" style="color: #fff" >@item.Head</a>
     }
 
 </div>

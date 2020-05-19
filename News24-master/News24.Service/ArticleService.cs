@@ -15,6 +15,8 @@ namespace News24.Service
 
         List<Article> GetArticles();
 
+        List<Article> GetPopular();
+
         IEnumerable<ValidationResult> CanAddArticle(Article newArticle);
 
         void CreateArticle(Article article);
@@ -27,6 +29,7 @@ namespace News24.Service
 
         IEnumerable<Article> GetArticlesByKeyWord(string keyWord);
 
+        void AddView(Article article);
     }
     public class ArticleService : IArticleService
     {
@@ -38,6 +41,11 @@ namespace News24.Service
         {
             _articleRepository = articleRepository;
             _unitOfWork = unitOfWork;
+        }
+
+        public List<Article> GetPopular()
+        {
+            return _articleRepository.GetAll().OrderByDescending(x => x.Views).ToList();
         }
 
         public IEnumerable<ValidationResult> CanAddArticle(Article newArticle)
@@ -86,9 +94,10 @@ namespace News24.Service
             return article;
         }
 
-        public List<Article> GetArticles() => _articleRepository.GetAll().OrderByDescending(x=>x.ArticleId).ToList();
+        public List<Article> GetArticles() => _articleRepository.GetAll().OrderByDescending(x => x.ArticleId).ToList();
 
-        public IEnumerable<Article> Find(ArticleFilterModel filterModel, int skip,int count)
+
+        public IEnumerable<Article> Find(ArticleFilterModel filterModel, int skip, int count)
         {
             if (filterModel == null)
             {
@@ -121,6 +130,12 @@ namespace News24.Service
                 .OrderByDescending(x => x.PublicationDate);
 
             return articles;
+        }
+
+        public void AddView(Article article)
+        {
+            article.Views++;
+            _unitOfWork.Commit();
         }
     }
 }
