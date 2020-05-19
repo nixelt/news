@@ -86,7 +86,7 @@ namespace News24.Service
             return article;
         }
 
-        public List<Article> GetArticles() => _articleRepository.GetAll().ToList();
+        public List<Article> GetArticles() => _articleRepository.GetAll().OrderByDescending(x=>x.ArticleId).ToList();
 
         public IEnumerable<Article> Find(ArticleFilterModel filterModel, int skip,int count)
         {

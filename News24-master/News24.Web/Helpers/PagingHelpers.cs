@@ -83,7 +83,8 @@ namespace News24.Web.Helpers
                 {
                     buttonTag.AddCssClass("active");
                 }
-                buttonTag.AddCssClass("btn_pagging");
+                buttonTag.AddCssClass("btn");
+                buttonTag.AddCssClass("btn_padding");
                 buttonTag.MergeAttribute("type", "submit");
                 buttonTag.MergeAttribute("name", "page");
                 buttonTag.MergeAttribute("value", i.ToString());

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace News24.Web.ViewModels.StartViewModels
 {
@@ -16,6 +17,7 @@ namespace News24.Web.ViewModels.StartViewModels
         [MinLength(2, ErrorMessage = "Вы ввели слишком мало символов!")]
         public string Head { get; set; }
         [Required]
+        [AllowHtml]
         [Display(Name = "Содержимое")]
         [MaxLength(5000, ErrorMessage = "Вы ввели слишком много символов!")]
         [MinLength(2, ErrorMessage = "Вы ввели слишком мало символов!")]

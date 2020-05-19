@@ -569,7 +569,7 @@ a, a:hover {
 
 .fh5co_most_trading {
     height: 60px;
-    width: 100%
+    max-width: 100%
 }
 
 .most_fh5co_treding_font_123 {
@@ -1126,3 +1126,35 @@ a, a:hover {
         font-size: 1.05rem
     }
 /*# sourceMappingURL=style_1.css.map */
+
+
+.btn_padding {
+    margin-right: 10px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.btn_padding:hover {
+    background-color: #fae373;
+}
+
+    .btn_padding.active {
+        background-color: #f5bc04;
+    }
+
+.responsive-img {
+    position: relative;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.responsive-img img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+}

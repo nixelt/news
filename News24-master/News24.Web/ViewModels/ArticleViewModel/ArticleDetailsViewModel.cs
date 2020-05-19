@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace News24.Web.ViewModels.ArticleViewModel
 {
@@ -14,6 +15,7 @@ namespace News24.Web.ViewModels.ArticleViewModel
 
         public string Head { get; set; }
 
+        [AllowHtml]
         public string Body { get; set; }
 
         public byte[] MainImage { get; set; }

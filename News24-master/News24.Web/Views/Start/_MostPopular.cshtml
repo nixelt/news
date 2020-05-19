@@ -5,11 +5,11 @@
 @foreach (var item in Model)
 {
     <div class="row pb-3">
-        <div class="col-5 align-self-center">
+        <div class="col-4 align-self-center" style="display: flex;justify-content: center">
             <img src="data:image/jpeg;base64, @Convert.ToBase64String(item.MainImage)" alt="@item.Head" class="fh5co_most_trading" />
         </div>
-        <div class="col-7 paddding">
-            @Html.ActionLink(item.Head,"Details","Start", new { id = item.ArticleId},htmlAttributes: new { @class="most_fh5co_treding_font ", @style ="text-decoration:none; color:black;"} )
+        <div class="col-8 paddding">
+            @Html.ActionLink(item.Head, "Details", "Start", new { id = item.ArticleId }, htmlAttributes: new { @class = "most_fh5co_treding_font ", @style = "text-decoration:none; color:black;" })
             <div class="most_fh5co_treding_font_123"> @item.PublicationDate.ToString("D")</div>
         </div>
     </div>
