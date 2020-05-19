@@ -5,6 +5,7 @@ using News24.Model;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using News24.Service.Infrastructure;
 
 namespace News24.Service
 {
@@ -21,6 +22,10 @@ namespace News24.Service
         void UpdateArticle(Article article);
 
         void DeleteArticle(Article article);
+
+        IEnumerable<Article> Find(ArticleFilterModel filterModel, int skip, int count);
+
+        IEnumerable<Article> GetArticlesByKeyWord(string keyWord);
 
     }
     public class ArticleService : IArticleService
@@ -83,12 +88,39 @@ namespace News24.Service
 
         public List<Article> GetArticles() => _articleRepository.GetAll().ToList();
 
+        public IEnumerable<Article> Find(ArticleFilterModel filterModel, int skip,int count)
+        {
+            if (filterModel == null)
+            {
+                throw new ArgumentNullException(nameof(filterModel));
+            }
 
+            var articles = _articleRepository.GetMany(filterModel.GetExpression())
+                .OrderByDescending(x => x.PublicationDate).Skip(skip).Take(count);
+            return articles;
+        }
 
         public void UpdateArticle(Article article)
         {
             _articleRepository.Update(article);
             _unitOfWork.Commit();
+        }
+
+        public IEnumerable<Article> GetArticlesByKeyWord(string keyWord)
+        {
+            if (string.IsNullOrWhiteSpace(keyWord))
+            {
+                return GetArticles();
+            }
+
+            var articles = _articleRepository.GetMany(x =>
+                    x.Head.Contains(keyWord)
+                    || x.Body.Contains(keyWord)
+                    || x.Category.Name.Contains(keyWord)
+                    || x.Tags.Any(z => z.Value.Contains(keyWord)))
+                .OrderByDescending(x => x.PublicationDate);
+
+            return articles;
         }
     }
 }

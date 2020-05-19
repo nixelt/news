@@ -1,0 +1,13 @@
+﻿@model IEnumerable<News24.Web.ViewModels.StartViewModels.ArticleViewModel>
+
+<div class="container">
+    @foreach(var i in Model)
+    {
+        <div>
+            <hr />
+            <a class="btn btn-link" style="color:black" href="@Url.Action("Details","Start",new {id=i.ArticleId })"> 
+                <h5>@i.Head</h5>
+            </a>
+        </div>
+    }
+</div>
