@@ -64,7 +64,6 @@ namespace News24.Web.Controllers
                 Email = user.Email,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                Phone = user.PhoneNumber,
                 HasPassword = HasPassword(),
                 PhoneNumber = await _userManager.GetPhoneNumberAsync(user.Id),
                 TwoFactor = await _userManager.GetTwoFactorEnabledAsync(user.Id),

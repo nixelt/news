@@ -1,4 +1,4 @@
-﻿@using System.ComponentModel
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
@@ -82,7 +82,7 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid bg-faded fh5co_padd_mediya padding_786">
+    <div class="container-fluid bg-faded padding_786">
         <div class="container padding_786">
             <nav class="navbar navbar-toggleable-sm ">
                 <a class="navbar-brand" href="@Url.Action("Index", "Start")"><img src="~/images/logo.png" alt="img" class="mobile_logo_width" /></a>
@@ -92,18 +92,7 @@
                     <span class="fa fa-bars"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item ">
-                            <a class="nav-link  link" href="@Url.Action("Index", "Start") ">Главная </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link  link" href="@Url.Action("News", "Start")">Новости </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link  link" href="@Url.Action("Index", "Start")">Контакты</a>
-                        </li>
-
-                    </ul>
+                   @Html.Action("GetCategoriesHeader", "Start")
                 </div>
             </nav>
 

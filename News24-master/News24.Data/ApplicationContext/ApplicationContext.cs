@@ -43,6 +43,11 @@ namespace News24.Data.ApplicationContext
 
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+
+            modelBuilder.Entity<Article>()
+                .HasMany<Tag>(c => c.Tags)
+                .WithRequired(x => x.Article)
+                .WillCascadeOnDelete(true);
         }
     }
 }

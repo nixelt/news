@@ -110,6 +110,18 @@ namespace News24.Web.Areas.Admin.Controllers
               Value = x.Id.ToString()
 
           }).ToList();
-    }
 
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            var article = _articleService.GetArticle(id);
+            if (article == null)
+            {
+                return RedirectToAction("NotFound", "Error", new { Area = string.Empty });
+            }
+
+            _articleService.DeleteArticle(article);
+            return RedirectToAction("Index");
+        }
+    }
 }

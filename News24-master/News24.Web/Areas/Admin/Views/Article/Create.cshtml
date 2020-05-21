@@ -17,7 +17,7 @@
 
             <div>
                 @Html.ValidationSummary(true, string.Empty, new { @class = "text-danger" })
-                @Html.HiddenFor(model => model.Body, new { @class = "form-control",id="body" })
+                @Html.HiddenFor(model => model.Body, new { @class = "form-control", id = "body" })
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.Head, htmlAttributes: new { @class = "col-md-2" })
@@ -26,8 +26,8 @@
                         @Html.ValidationMessageFor(model => model.Head, string.Empty, new { @class = "text-danger" })
                     </div>
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "col-md-2" })
+                <div class="form-group" style="padding: 0 15px">
+                    @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "col-md-2", style = "padding-left:0" })
                     <div class="col-md-12" id="editor">
                     </div>
                 </div>
@@ -60,6 +60,8 @@
 </div>
 
 @section scripts{
+
+    @Scripts.Render("~/bundles/jqueryval")
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <script>

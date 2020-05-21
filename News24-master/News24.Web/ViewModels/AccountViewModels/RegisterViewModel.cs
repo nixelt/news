@@ -7,17 +7,14 @@ namespace News24.Web.ViewModels.AccountViewModels
 {
     public class RegisterViewModel : ContactInfoViewModel
     {
-        [Required]
         public HttpPostedFileBase AccountImage { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Обязательное поле")]
         [DataType(DataType.Password)]
         [DisplayName("Пароль")]
         public string Password { get; set; }
 
-
-
-        [Required]
+        [Required(ErrorMessage = "Обязательное поле")]
         [DisplayName("Подтвердите пароль")]
         [Compare("Password", ErrorMessage = "Пароли не совпадают!")]
         [DataType(DataType.Password)]

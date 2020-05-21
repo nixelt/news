@@ -80,24 +80,14 @@ namespace News24.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, PhoneNumber = model.Phone, AccountImage = model.AccountImage.ToByteArray() };
-       
+                var user = new User { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, AccountImage = model.AccountImage?.ToByteArray() };
+
                 var result = await _userManager.CreateAsync(user, model.Password).ConfigureAwait(false);
                 if (result.Succeeded)
                 {
                     var currentUser = await _userManager.FindByEmailAsync(user.Email).ConfigureAwait(false);
                     await _userManager.AddToRoleAsync(currentUser.Id, "User").ConfigureAwait(false);
                     await _signInManager.SignInAsync(user, isPersistent: false, rememberBrowser: true).ConfigureAwait(false);
-
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user.Id).ConfigureAwait(false);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code }, protocol: Request.Url.Scheme);
-                    await _userManager.SendEmailAsync(
-                            user.Id,
-                            "Подтвердите электронную почту",
-                            "Чтобы подтвердить регистрацию <a href=\"" + callbackUrl + "\">кликните здесь</a>")
-                        .ConfigureAwait(false);
 
                     Logger.Log.Info($"Был зарегистрирован новый пользователь {user.Email}");
                     return View("DisplayEmail");
@@ -210,7 +200,7 @@ namespace News24.Web.Controllers
             return View();
         }
         // POST: /Account/LogOff
-        [HttpPost]
+        [HttpGet]
         [System.Web.Mvc.Authorize]
         public ActionResult LogOff()
         {

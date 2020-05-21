@@ -1,10 +1,12 @@
 ﻿@model List<News24.Web.ViewModels.StartViewModels.ArticleViewModel>
 
-<div class="col-12 col-md-12 col-lg-4 ">
+<div class="col-12 col-lg-4 ">
     <div class="footer_main_title py-3"> Последние статьи</div>
     @foreach (var item in Model)
     {
-        <a href="@Url.Action("Details","Start")" class="footer_img_post_6" style="color: #fff" >@item.Head</a>
+        <div>
+            <a href="@Url.Action("Details","Start")" class="" style="color: #fff">@item.Head</a>
+        </div>
     }
 
 </div>

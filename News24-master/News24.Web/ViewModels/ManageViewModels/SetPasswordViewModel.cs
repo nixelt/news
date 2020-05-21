@@ -4,7 +4,7 @@ namespace News24.Web.ViewModels.ManageViewModels
 {
     public class SetPasswordViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Обязательное поле")]
         [StringLength(100, ErrorMessage = "Длина {0} должна быть не менее {2} символов.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Новый пароль")]

@@ -22,7 +22,7 @@
                             <image id="profileImage" src="~/images/person.png" />
                         </div>
                         <input id="imageUpload" type="file"
-                               name="AccountImage" placeholder="Photo" required="" >
+                               name="AccountImage" placeholder="Photo">
                     </div>
                     <div class="w-100"></div>
                     <div class="col-md-6">
@@ -52,15 +52,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.Phone, new { @class = "col-md-6 " })
-                            <div class="col-md-12">
-                                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", placeholder = "+380991245651" })
-                                @Html.ValidationMessageFor(m => m.Phone, string.Empty, new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
+
                     <div class="col-md-12">
                         <div class="form-group">
                             @Html.LabelFor(m => m.Password, new { @class = "col-md-6 " })
@@ -96,9 +88,12 @@
         </div>
     </div>
 </div>
-@section Scripts{
+@section scripts{
+
+    @Scripts.Render("~/bundles/jqueryval")
+
     <script>
-    $("#profileImage").click(function (e) {
+        $("#profileImage").click(function (e) {
             $("#imageUpload").click();
         });
 
@@ -112,5 +107,5 @@
         $("#imageUpload").change(function () {
             fasterPreview(this);
         });</script>
-   
+
 }

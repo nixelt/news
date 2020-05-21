@@ -6,7 +6,8 @@ namespace News24.Web.Areas.Admin.ViewModels.CategoryViewModels
     {
 
         public int Id { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Обязательное поле")]
         [Display(Name="Категория")]
         [MaxLength(50, ErrorMessage ="Вы ввели слишком много символов!")]
         [MinLength(2,ErrorMessage ="Вы ввели слишком мало символов!")]

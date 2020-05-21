@@ -5,7 +5,6 @@ using News24.Service.Infrastructure;
 using News24.Web.Models;
 using News24.Web.ViewModels.ArticleViewModel;
 using News24.Web.ViewModels.StartViewModels;
-using NHibernate.Cfg;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -130,6 +129,14 @@ namespace News24.Web.Controllers
             var categories = _categoryService.GetCategories();
             var model = categories.Select(Mapper.Map<Category, CategoryViewModel>).ToList();
             return PartialView("_CategoriesInFooter", model);
+        }
+
+        [ChildActionOnly]
+        public ActionResult GetCategoriesHeader()
+        {
+            var categories = _categoryService.GetCategories();
+            var model = categories.Select(Mapper.Map<Category, CategoryViewModel>).ToList();
+            return PartialView("_CategoriesInHeader", model);
         }
 
         [ChildActionOnly]

@@ -4,12 +4,12 @@ namespace News24.Web.ViewModels.ManageViewModels
 {
     public class ChangePasswordViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Обязательное поле")]
         [DataType(DataType.Password)]
         [Display(Name = "Текущий пароль")]
         public string OldPassword { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Обязательное поле")]
         [StringLength(100, ErrorMessage = "Длина {0} должна быть не менее {2} символов.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Новый пароль")]

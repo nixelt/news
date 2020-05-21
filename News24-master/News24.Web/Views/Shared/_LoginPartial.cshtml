@@ -5,8 +5,11 @@
 @if (User.Identity.IsAuthenticated)
 {
     <div clas="col-md-12">
-        <a href="@Url.Action("Index","Manage")" class="color_fff fh5co_mediya_setting">
-            <i class="fa fa-user-md"></i> Профиль
+        @*<a href="@Url.Action("Index","Manage")" class="color_fff fh5co_mediya_setting">
+                <i class="fa fa-user-md"></i> Профиль
+            </a>*@
+        <a href="@Url.Action("Logoff","Account")" class="color_fff fh5co_mediya_setting">
+            Выйти
         </a>
     </div>
     if (User.IsInRole("Admin"))

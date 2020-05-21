@@ -10,5 +10,7 @@ namespace News24.Web.Areas.Admin.ViewModels.ArticleViewModels
         public HttpPostedFileBase Image { get; set; }
 
         public List<SelectListItem> CategoriesList { get; set; }
+
+        public string UserId { get; set; }
     }
 }

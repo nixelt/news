@@ -1,0 +1,9 @@
+﻿@model List<News24.Web.ViewModels.StartViewModels.CategoryViewModel>
+<ul class="navbar-nav mr-auto">
+    @foreach (var item in Model)
+    {
+        <li class="nav-item ">
+            <a class="nav-link  link" href="@Url.Action("Index", "Start") ">@item.Name </a>
+        </li>
+    }
+</ul>
