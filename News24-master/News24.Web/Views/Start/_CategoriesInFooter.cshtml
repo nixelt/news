@@ -4,7 +4,7 @@
     <ul class="footer_menu">
         @foreach (var item in Model)
         {
-        <li><a href="@Url.Action("News", "Start", new { category = item.Name})" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; @item.Name</a></li>
+        <li><a href="@Url.Action("Category", "Start", new { category = item.Name})" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; @item.Name</a></li>
         }
     </ul>
 </div>

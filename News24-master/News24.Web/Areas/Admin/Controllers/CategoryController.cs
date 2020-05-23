@@ -25,7 +25,7 @@ namespace News24.Web.Areas.Admin.Controllers
         {
             var categories = _categoryService.GetCategories();
             var categoriesList = categories.Select(Mapper.Map<Category, CategoryViewModel>).Skip((page - 1) * pageSize).Take(pageSize).ToList();
-            var pager = new Pager(page,categories.Count(), pageSize);
+            var pager = new Pager(page, categories.Count(), pageSize);
             var model = new IndexCategoryViewModel
             {
                 Categories = categoriesList,
@@ -87,6 +87,17 @@ namespace News24.Web.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            var category = _categoryService.GetCategory(id);
+            if (category == null)
+            {
+                return RedirectToAction("NotFound", "Error", new { Area = string.Empty });
+            }
 
+            _categoryService.DeleteCategory(category);
+            return RedirectToAction("Index");
+        }
     }
 }

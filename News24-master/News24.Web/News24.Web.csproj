@@ -474,8 +474,6 @@
     <Content Include="Content\style_1.scss" />
     <Content Include="Content\style_1.css.map" />
     <Content Include="Areas\Admin\Views\web.config" />
-    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\User\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Category\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Article\Index.cshtml" />
@@ -495,6 +493,8 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -605,10 +605,10 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="Views\Start\_CategoriesInHeader.cshtml" />
+    <Content Include="Views\Start\Category.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Article\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\News24.Data\News24.Data.csproj">

@@ -2,8 +2,8 @@
 <ul class="navbar-nav mr-auto">
     @foreach (var item in Model)
     {
-        <li class="nav-item ">
-            <a class="nav-link  link" href="@Url.Action("Index", "Start") ">@item.Name </a>
+        <li class="nav-item">
+            @Html.ActionLink(item.Name, "Category", "Start", null, null, null, new { category = item.Name }, new { @class = "nav-link link text-uppercase" })
         </li>
     }
 </ul>

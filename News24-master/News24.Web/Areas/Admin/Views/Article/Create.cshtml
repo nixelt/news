@@ -30,6 +30,7 @@
                     @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "col-md-2", style = "padding-left:0" })
                     <div class="col-md-12" id="editor">
                     </div>
+                    @Html.ValidationMessageFor(model => model.Body, string.Empty, new { @class = "text-danger" })
                 </div>
 
                 <div class="form-group">

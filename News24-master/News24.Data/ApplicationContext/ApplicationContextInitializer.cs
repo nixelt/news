@@ -15,7 +15,7 @@ namespace News24.Data.ApplicationContext
             var roles = new List<IdentityRole>
             {
                 new IdentityRole("User"),
-                new IdentityRole("Manager"),
+                new IdentityRole("Moderator"),
                 new IdentityRole("Admin")
             };
             roles.ForEach(role => context.Roles.Add(role));

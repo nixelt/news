@@ -1,15 +1,18 @@
-﻿@model News24.Web.ViewModels.StartViewModels.IndexViewModel
-@using News24.Web.Helpers
-@if (Model.Articles.Count == 0)
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@model List<News24.Web.ViewModels.StartViewModels.ArticleViewModel>
+
+@if (Model.Count == 0)
 {
-    <p>Новостей нет</p>
+    <p>
+        Новостей нет
+    </p>
 }
-@foreach (var item in Model.Articles)
+@foreach (var item in Model)
 {
     <div class="row pb-4">
         <div class="col-md-5">
             <div class="fh5co_hover_news_img">
-                <div class="fh5co_news_img">
+                <div class="fh5co_news_img" style="cursor: pointer">
                     <a href="@Url.Action("Details", "Start",new{ id = item.ArticleId })">
                         <img class="img-fluid " src="data:image/jpeg;base64, @Convert.ToBase64String(item.MainImage)" alt="@item.Head" />
                     </a>
@@ -25,18 +28,19 @@
                 @item.PublicationDate.ToString("dd.MM.yyyy HH:mm")
             </a>
             <div class="fh5co_consectetur">
-                @Html.Raw(item.Body.Substring(0, item.Body.Length > 200 ? 200 : item.Body.Length))
+                @Html.Raw(item.Body.Substring(0, item.Body.Length > 500 ? 500 : item.Body.Length))
                 ...
             </div>
 
         </div>
     </div>
 }
-<div class="row mx-0 animate-box" data-animate-effect="fadeInUp">
-    <div class="col-12 text-center pb-4 pt-4">
+
+@*<div class="row mx-0 animate-box" data-animate-effect="fadeInUp">
+        <div class="col-12 text-center pb-4 pt-4">
 
 
-        @Html.PaginationArticlesAjax(Model.Pager)
+            @Html.PaginationArticlesAjax(Model.Pager)
 
-    </div>
-</div>
+        </div>
+    </div>*@

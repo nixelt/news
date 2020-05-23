@@ -50,14 +50,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-3 fh5co_padding_menu">
-                    <a class="navbar-brand" href="@Url.Action("Index", "Start")">
+                    <a class="navbar-brand" href="@Url.Action("Index", "Start" )">
                         <img src="~/images/logo.png" alt="img" class="fh5co_logo_width" />
                     </a>
                 </div>
                 <div class="col-12 col-md-9 align-self-center fh5co_mediya_right">
                     <div class="text-center d-inline-block" style="vertical-align: top">
                         <input type="search" class="form-control ui-autocomplete"
-                               data-autocomplete="@Url.Action("Autocomplete", "Start")" />
+                               data-autocomplete="@Url.Action(" Autocomplete", "Start" )" />
 
                     </div>
                     <div class="text-center d-inline-block">
@@ -84,24 +84,20 @@
     </div>
     <div class="container-fluid bg-faded padding_786">
         <div class="container padding_786">
-            <nav class="navbar navbar-toggleable-sm ">
-                <a class="navbar-brand" href="@Url.Action("Index", "Start")"><img src="~/images/logo.png" alt="img" class="mobile_logo_width" /></a>
-                <button class="navbar-toggler navbar-toggler-right " type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                    <span class="fa fa-bars"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                   @Html.Action("GetCategoriesHeader", "Start")
+            <nav class="navbar navbar-expand pl-0">
+                <div class="">
+                    @Html.Action("GetCategoriesHeader", "Start")
                 </div>
             </nav>
 
         </div>
     </div>
 
-    <div class="container-fluid">
+<div class="container-fluid">
+    <div class="container">
         @RenderBody()
     </div>
+</div>
 
     <div class="container-fluid fh5co_footer_bg pb-3">
         <div class="container animate-box">
@@ -149,9 +145,9 @@
             <div class="row  ">
                 <div class="col-12 col-md-6 py-4 Reserved"> © Все права защищены 2020 </div>
                 <div class="col-12 col-md-6 spdp_right py-4">
-                    <a href="@Url.Action("Index", "Start")" class="footer_last_part_menu">Главная</a>
-                    <a href="@Url.Action("Contact", "Start")" class="footer_last_part_menu">Контакты</a>
-                    <a href="@Url.Action("News", "Start")" class="footer_last_part_menu">Новости</a>
+                    <a href="@Url.Action(" Index", "Start" )" class="footer_last_part_menu">Главная</a>
+                    <a href="@Url.Action(" Contact", "Start" )" class="footer_last_part_menu">Контакты</a>
+                    <a href="@Url.Action(" News", "Start" )" class="footer_last_part_menu">Новости</a>
                 </div>
             </div>
         </div>

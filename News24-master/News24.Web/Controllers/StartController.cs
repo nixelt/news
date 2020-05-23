@@ -18,7 +18,7 @@ namespace News24.Web.Controllers
         private readonly IArticleService _articleService;
         private readonly ICategoryService _categoryService;
         private readonly ITagService _tagService;
-        private const int _pageSize = 4;
+        private const int _pageSize = 6;
 
         public StartController(IArticleService articleService, ICategoryService categoryService, ITagService tagService)
         {
@@ -34,7 +34,7 @@ namespace News24.Web.Controllers
             var tags = _tagService.GetDistinctTags();
             var articles = _articleService.GetArticles();
             var mappCategories = categories.Select(Mapper.Map<Category, CategoryViewModel>).ToList();
-            var mappArticles = articles.Select(Mapper.Map<Article, ArticleViewModel>).Skip((page - 1) * _pageSize).Take(_pageSize).Reverse().ToList();
+            var mappArticles = articles.Select(Mapper.Map<Article, ArticleViewModel>).Skip((page - 1) * _pageSize).Take(_pageSize).ToList();
             var mappLastArticles = articles.Select(Mapper.Map<Article, ArticleViewModel>).OrderByDescending(x => x.PublicationDate).Take(5).ToList();
             var pager = new Pager(page, articles.Count(), _pageSize);
             var model = new IndexViewModel
@@ -49,22 +49,19 @@ namespace News24.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult GetArticles(int page = 1, string category = null)
+        public ActionResult GetArticles(int page = 1, string category = null, string tag = null)
         {
-            if (!String.IsNullOrEmpty(category))
-            {
-                Session["Category"] = null;
-            }
-            if (Session["Category"] != null)
-            {
-                category = Session["Category"].ToString();
-            }
-            Session["Category"] = category;
             var articles = _articleService.GetArticles();
             if (!String.IsNullOrEmpty(category))
             {
                 articles = articles.Where(x => x.Category.Name == category).ToList();
             }
+
+            if (!string.IsNullOrEmpty(tag))
+            {
+                articles = articles.Where(x => x.Tags.Any(t => t.Value.Equals(tag))).ToList();
+            }
+
             var mappArticles = articles.Select(Mapper.Map<Article, ArticleViewModel>).Skip((page - 1) * _pageSize).Take(_pageSize).Reverse().ToList();
             var pager = new Pager(page, articles.Count(), _pageSize);
             var model = new IndexViewModel
@@ -75,6 +72,20 @@ namespace News24.Web.Controllers
             };
             return PartialView("_Articles", model);
         }
+
+        public ActionResult Category(string category)
+        {
+            var currentCategory = _categoryService.GetCategories().FirstOrDefault(x => x.Name.Equals(category));
+            if (currentCategory == null)
+            {
+                return RedirectToAction("NotFound", "Error");
+            }
+
+            var articles = _articleService.GetArticles().Where(x => x.CategoryId == currentCategory.Id);
+            var articleViewModels = Mapper.Map<IEnumerable<Article>, List<ArticleViewModel>>(articles);
+            return View(articleViewModels);
+        }
+
         //public ActionResult Autocomplete(string term)
         //{
         //    try

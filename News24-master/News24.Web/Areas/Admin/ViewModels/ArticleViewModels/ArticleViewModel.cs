@@ -18,7 +18,7 @@ namespace News24.Web.Areas.Admin.ViewModels.ArticleViewModels
         [Required(ErrorMessage = "Обязательное поле")]
         [AllowHtml]
         [Display(Name = "Содержимое")]
-        [MaxLength(10000, ErrorMessage = "Вы ввели слишком много символов!")]
+        [MaxLength(100000, ErrorMessage = "Вы ввели слишком много символов!")]
         [MinLength(2, ErrorMessage = "Вы ввели слишком мало символов!")]
         public string Body { get; set; }
 

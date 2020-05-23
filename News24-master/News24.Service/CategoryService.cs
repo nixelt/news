@@ -61,11 +61,12 @@ namespace News24.Service
 
         public void DeleteCategory(Category category)
         {
-            _categoryRepository.Delete(category);
+            category.IsDeleted = true;
+            _categoryRepository.Update(category);
             _unitOfWork.Commit();
         }
 
-        public List<Category> GetCategories() => _categoryRepository.GetAll().ToList();
+        public List<Category> GetCategories() => _categoryRepository.GetAll().Where(x => !x.IsDeleted).ToList();
 
 
         public Category GetCategory(int id) => _categoryRepository.GetById(id);

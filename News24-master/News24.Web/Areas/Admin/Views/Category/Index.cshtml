@@ -29,6 +29,7 @@
             </td>
             <td class="text-right">
                 @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Удалить", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
             </td>
         </tr>
     }
