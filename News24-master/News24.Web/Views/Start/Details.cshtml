@@ -1,4 +1,5 @@
-﻿@model News24.Web.ViewModels.ArticleViewModel.ArticleDetailsViewModel
+﻿@using Microsoft.AspNet.Identity
+@model News24.Web.ViewModels.ArticleViewModel.ArticleDetailsViewModel
 @{
     ViewBag.Title = Model.Head;
 }
@@ -54,8 +55,14 @@
                                     <div class="clearfix"></div>
                                     <p>@item.Body</p>
                                     <p>
-                                        <a class="float-right btn btn-outline-primary ml-2">Изменить</a>
-                                        <a class="float-right btn text-white btn-danger">Удалить</a>
+                                        @if (HttpContext.Current.User.Identity.IsAuthenticated && (item.UserId == HttpContext.Current.User.Identity.GetUserId() || User.IsInRole("Moderator")))
+                                        {
+                                            using (Html.BeginForm("Delete", "Comment"))
+                                            {
+                                                @Html.Hidden("CommentId", item.CommentId)
+                                                <button class="float-right btn text-white btn-danger">Удалить</button>
+                                            }
+                                        }
                                     </p>
                                 </div>
                             </div>

@@ -181,12 +181,15 @@ namespace News24.Web.Controllers
             {
                 articles = articles.Where(x => x.Category.Name == category).ToList();
             }
+
+            var tags = _tagService.GetDistinctTags();
             var mappArticles = articles.Select(Mapper.Map<Article, ArticleViewModel>).Skip((page - 1) * _pageSize).Take(_pageSize).Reverse().ToList();
             var mappCategories = categories.Select(Mapper.Map<Category, CategoryViewModel>).ToList();
             var pager = new Pager(page, articles.Count(), _pageSize);
             var model = new IndexViewModel
             {
                 Articles = mappArticles,
+                Tags = tags,
                 Pager = pager,
                 Categories = mappCategories
             };
@@ -240,6 +243,13 @@ namespace News24.Web.Controllers
             var result = Mapper.Map<IEnumerable<Article>, IEnumerable<ArticleViewModel>>(articles);
 
             return PartialView(result);
+        }
+
+        public ActionResult Autocomplete()
+        {
+            var tags = _tagService.GetDistinctTags();
+            var model = tags.Select(x => x.Value);
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
     }
 }

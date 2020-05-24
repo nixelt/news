@@ -23,6 +23,7 @@ namespace News24.Data.ApplicationContext
             var user = new User { Email = "admin@gmail.com", UserName = "admin@gmail.com", FirstName = "Admin", LastName = "Admin", PhoneNumber = "+380990482560" };
      
             manager.Create(user, "Admin1");
+            manager.AddToRole(user.Id, "Moderator");
             manager.AddToRole(user.Id, "Admin");
             base.Seed(context);
         }

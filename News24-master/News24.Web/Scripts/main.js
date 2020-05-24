@@ -23,43 +23,43 @@
             }
         });
 
-            $('#slider2').owlCarousel({
-                loop: false,
-                margin: 10,
-                dots: false,
-                nav: true,
-                navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    600: {
-                        items: 2
-                    },
-                    1000: {
-                        items: 3
-                    }
+        $('#slider2').owlCarousel({
+            loop: false,
+            margin: 10,
+            dots: false,
+            nav: true,
+            navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                1000: {
+                    items: 3
                 }
-            });
+            }
+        });
 
-            $('#slider3').owlCarousel({
-                loop: false,
-                margin: 10,
-                dots: false,
-                nav: true,
-                navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    600: {
-                        items: 2
-                    },
-                    1000: {
-                        items: 3
-                    }
+        $('#slider3').owlCarousel({
+            loop: false,
+            margin: 10,
+            dots: false,
+            nav: true,
+            navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                1000: {
+                    items: 3
                 }
-            });
+            }
+        });
 
     };
 
@@ -310,7 +310,7 @@ var submitAutocompleteForm = function (event, ui) {
 };
 var createAutocomplete = function () {
     var $input = $(this); // the HTML element (Textbox)
-
+    console.log($input);
     var options = {
         // selecting the source by finding elements with the 'data-' attribute
         source: $input.attr("data-autocomplete"), // Required

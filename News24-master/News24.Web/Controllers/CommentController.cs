@@ -57,5 +57,25 @@ namespace News24.Web.Controllers
             Logger.Log.Info($"{User.Identity.Name} оставил комментарий к статье {articleId}. Содержание комментария: \"{commentBody}\"");
             return RedirectToAction("Details", "Start", new { id = articleId });
         }
+
+        [HttpPost]
+        public ActionResult Delete(int commentId)
+        {
+            var comment = _commentService.GetComment(commentId);
+            if (comment == null)
+            {
+                return RedirectToAction("NotFound", "Error");
+            }
+
+            var userId = User.Identity.GetUserId();
+            if (comment.UserId != userId && User.IsInRole("Moderator"))
+            {
+                return RedirectToAction("AccessDenied", "Error");
+            }
+
+            var articleId = comment.ArticleId;
+            _commentService.DeleteComment(comment);
+            return RedirectToAction("Details", "Start", new { id = articleId });
+        }
     }
 }

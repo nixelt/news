@@ -20,6 +20,8 @@
     <!-- Modernizr JS -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     @Styles.Render("~/Content/css")
 
     <link href="@Url.Content("~/Content/main.css")" rel="stylesheet" type="text/css" />
@@ -56,11 +58,11 @@
                 </div>
                 <div class="col-12 col-md-9 align-self-center fh5co_mediya_right">
                     <div class="text-center d-inline-block" style="vertical-align: top">
-                        <input type="search" class="form-control ui-autocomplete"
-                               data-autocomplete="@Url.Action(" Autocomplete", "Start" )" />
+                        <input type="search" id="tags" class="form-control"
+                               data-autocomplete="@Url.Action("Autocomplete", "Start")" />
 
                     </div>
-                    <div class="text-center d-inline-block">
+                    <div class="text-center d-inline-block" id="search">
                         <a class="fh5co_display_table">
                             <div class="fh5co_verticle_middle"><i class="fa fa-search"></i></div>
                         </a>
@@ -76,7 +78,6 @@
                             <div class="fh5co_verticle_middle"><i class="fa fa-facebook"></i></div>
                         </a>
                     </div>
-                    <!--<div class="d-inline-block text-center"><img src="~/images/country.png" alt="img" class="fh5co_country_width"/></div>-->
                     <div class="clearfix"></div>
                 </div>
             </div>
@@ -145,9 +146,8 @@
             <div class="row  ">
                 <div class="col-12 col-md-6 py-4 Reserved"> © Все права защищены 2020 </div>
                 <div class="col-12 col-md-6 spdp_right py-4">
-                    <a href="@Url.Action(" Index", "Start" )" class="footer_last_part_menu">Главная</a>
-                    <a href="@Url.Action(" Contact", "Start" )" class="footer_last_part_menu">Контакты</a>
-                    <a href="@Url.Action(" News", "Start" )" class="footer_last_part_menu">Новости</a>
+                    <a href="@Url.Action("Index", "Start" )" class="footer_last_part_menu">Главная</a>
+                    <a href="@Url.Action("News", "Start" )" class="footer_last_part_menu">Новости</a>
                 </div>
             </div>
         </div>
@@ -175,7 +175,31 @@
     @Scripts.Render("~/scripts/owl.carousel.min.js")
     @Scripts.Render("~/bundles/main")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     @RenderSection("scripts", required: false)
 
+    <script>
+        $(function () {
+            var availableTags;
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                url: '/Start/autocomplete',
+                data: '',
+                success: function (result) {
+                    availableTags = result;
+                    $("#tags").autocomplete({
+                        source: availableTags
+                    });
+                }
+            });
+
+        });
+
+        $('#search').click(function () {
+            var value = $("#tags").val();
+            window.location.href = '/Start/GetByKeyWord?keyword=' + value;
+        });
+    </script>
 </body>
 </html>
