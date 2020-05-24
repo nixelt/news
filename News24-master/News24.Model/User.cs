@@ -12,7 +12,7 @@ namespace News24.Model
         [Required]
         [MaxLength(50)]
         public string FirstName { get; set; }
-        
+
         [Required]
         [MaxLength(50)]
         public string LastName { get; set; }
@@ -21,7 +21,8 @@ namespace News24.Model
 
         public override DateTime? LockoutEndDateUtc { get; set; }
 
-        public virtual List<Article> Articles { get; set; } 
+        public virtual List<Article> Articles { get; set; }
 
+        public virtual List<Comment> Comments { get; set; }
     }
 }

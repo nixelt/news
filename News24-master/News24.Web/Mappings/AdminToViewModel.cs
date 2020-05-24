@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using News24.Model;
 using News24.Web.Areas.Admin.ViewModels.ArticleViewModels;
 using News24.Web.Areas.Admin.ViewModels.CategoryViewModels;
@@ -25,14 +26,14 @@ namespace News24.Web.Mappings
             //Log
             CreateMap<Log, LogViewModel>()
                 .ForMember(
-                m=> m.Message,
-                opt=> opt.MapFrom(
+                m => m.Message,
+                opt => opt.MapFrom(
                     p => p.Message.Substring(0, p.Message.Length > 200 ? 200 : p.Message.Length) + "..."));
 
             //User
             CreateMap<User, UserViewModel>().ForMember(
-                m=>m.IsBlocked, 
-                opt=>opt.MapFrom(src=>src.LockoutEnabled)
+                m => m.IsBlocked,
+                opt => opt.MapFrom(src => src.LockoutEndDateUtc > DateTime.Now)
                 );
             CreateMap<User, DetailsUserViewModel>();
             CreateMap<Tag, TagViewModel>();

@@ -114,7 +114,7 @@ namespace News24.Web.Controllers
             var article = _articleService.GetArticle(id);
             _articleService.AddView(article);
             var model = Mapper.Map<Article, ArticleDetailsViewModel>(article);
-
+            model.Comments = model.Comments.OrderByDescending(x => x.CommentDate).ToList();
             return View(model);
         }
 

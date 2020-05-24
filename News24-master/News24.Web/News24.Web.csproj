@@ -389,6 +389,7 @@
     <Compile Include="Areas\Admin\ViewModels\UserViewModels\IndexUserViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\UserViewModels\UserViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\StartController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -451,6 +452,7 @@
     <Content Include="images\Account.jpg" />
     <Content Include="images\allef-vinicius-108153.jpg" />
     <Content Include="images\ariel-lustre-208615.jpg" />
+    <Content Include="images\avatar.png" />
     <Content Include="images\camila-cordeiro-114636.jpg" />
     <Content Include="images\country.png" />
     <Content Include="images\download %281%29.jpg" />
@@ -609,6 +611,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Comment\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\News24.Data\News24.Data.csproj">

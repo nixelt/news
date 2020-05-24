@@ -29,5 +29,6 @@ namespace News24.Model
 
         public virtual List<Tag> Tags { get; set; }
 
+        public virtual List<Comment> Comments { get; set; }
     }
 }

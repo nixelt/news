@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using News24.Model;
 
 namespace News24.Web.ViewModels.ArticleViewModel
 {
@@ -22,11 +23,16 @@ namespace News24.Web.ViewModels.ArticleViewModel
 
         public DateTime PublicationDate { get; set; }
 
-
         public ContactInfoViewModel User { get; set; }
 
-        public  ArticleCategoryViewModel Category { get; set; }
+        public ArticleCategoryViewModel Category { get; set; }
 
         public long Views { get; set; }
+
+        public List<Tag> Tags { get; set; }
+
+        public List<Comment> Comments { get; set; }
+
+        public string CommentBody { get; set; }
     }
 }
