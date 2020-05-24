@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace News24.Web.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin, Moderator")]
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;

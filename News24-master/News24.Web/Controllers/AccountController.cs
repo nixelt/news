@@ -36,6 +36,7 @@ namespace News24.Web.Controllers
         {
             return View(new LoginViewModel() { ReturnUrl = returnUrl });
         }
+
         [HttpPost]
         [OnlyAnonymous]
         [ValidateAntiForgeryToken]

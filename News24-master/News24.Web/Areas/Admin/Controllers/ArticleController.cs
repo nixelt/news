@@ -13,7 +13,7 @@ using System.Web.Mvc;
 
 namespace News24.Web.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin, Moderator")]
     public class ArticleController : Controller
     {
         private readonly IArticleService _articleService;

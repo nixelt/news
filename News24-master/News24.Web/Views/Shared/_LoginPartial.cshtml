@@ -5,7 +5,7 @@
 @if (User.Identity.IsAuthenticated)
 {
    
-    if (User.IsInRole("Admin"))
+    if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
     {
         <div clas="col-md-12">
             <a href="@Url.Action("Index","Home", new { Area = "Admin" })" class="color_fff fh5co_mediya_setting">

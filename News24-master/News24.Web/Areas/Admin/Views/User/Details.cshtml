@@ -9,23 +9,25 @@
 
         <div class="d-flex justify-content-between align-items-center">
             <h2>@ViewBag.Title</h2>
-
-            @if (!Model.IsBlocked)
+            @if (!Model.IsModerator)
             {
-                using (Html.BeginForm("Block", "User"))
+                if (!Model.IsBlocked)
                 {
-                    @Html.ValidationSummary()
-                    @Html.Hidden("id", Model.Id)
-                    <button class="btn btn-danger">Заблокировать</button>
+                    using (Html.BeginForm("Block", "User"))
+                    {
+                        @Html.ValidationSummary()
+                        @Html.Hidden("id", Model.Id)
+                        <button class="btn btn-danger">Заблокировать</button>
+                    }
                 }
-            }
-            else
-            {
-                using (Html.BeginForm("Unblock", "User"))
+                else
                 {
-                    @Html.ValidationSummary()
-                    @Html.Hidden("id", Model.Id)
-                    <button class="btn btn-warning">Разблокировать</button>
+                    using (Html.BeginForm("Unblock", "User"))
+                    {
+                        @Html.ValidationSummary()
+                        @Html.Hidden("id", Model.Id)
+                        <button class="btn btn-warning">Разблокировать</button>
+                    }
                 }
             }
 
@@ -61,19 +63,21 @@
             </dl>
         </div>
         <p>
-            @if (User.IsInRole("Admin"))
+            @if (User.IsInRole("Admin") && !Model.IsBlocked)
             {
                 if (Model.IsModerator)
                 {
-                    @Html.ActionLink("Забрать права модератора", "Fire", new{id = Model.Id}, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Забрать права модератора", "Fire", new { id = Model.Id }, new { @class = "btn btn-warning" })
                 }
                 else
                 {
-                    @Html.ActionLink("Сделать модератором", "Add", new{id = Model.Id}, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Сделать модератором", "Add", new { id = Model.Id }, new { @class = "btn btn-primary" })
                 }
             }
 
-            @Html.ActionLink("Назад", "Index", null, new { @class = "btn btn-secondary" })
+            @Html.ActionLink("Назад", "Index", null, new
+            {
+                @class = "btn btn-secondary"})
         </p>
     </div>
 </div>

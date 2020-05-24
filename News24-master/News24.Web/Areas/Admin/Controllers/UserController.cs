@@ -13,7 +13,7 @@ using News24.Web.Extensions;
 
 namespace News24.Web.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin, Moderator")]
     public class UserController : Controller
     {
         private readonly ApplicationUserManager _userManager;
@@ -22,6 +22,7 @@ namespace News24.Web.Areas.Admin.Controllers
         {
             _userManager = userManager;
         }
+
         // GET: Admin/User
         public ActionResult Index(bool onlyBlocked = false, bool onlyUnlock = false, int page = 1)
         {
@@ -46,6 +47,7 @@ namespace News24.Web.Areas.Admin.Controllers
             {
                 return RedirectToAction("NotFound", "Error", new { Area = string.Empty });
             }
+
             var model = Mapper.Map<User, DetailsUserViewModel>(user);
             model.IsBlocked = user.LockoutEndDateUtc > DateTime.Now;
             var userRoles = _userManager.GetRoles(user.Id);
@@ -89,12 +91,12 @@ namespace News24.Web.Areas.Admin.Controllers
 
             if (await _userManager.IsInRoleAsync(id, "Admin").ConfigureAwait(false))
             {
-                return RedirectToAction("Details", new { id, msg = "Вы не можете уволить адмнистратора!" });
+                return RedirectToAction("Details", new { id, msg = "Вы не можете забрать права модератора у адмнистратора!" });
             }
 
             await _userManager.RemoveFromRoleAsync(id, "Moderator").ConfigureAwait(false);
-            Logger.Log.Info($"{User.Identity.Name} уволил пользователя {user.UserName}");
-            return RedirectToAction("Index");
+            Logger.Log.Info($"{User.Identity.Name} забрал права модератора у пользователя {user.UserName}");
+            return RedirectToAction("Details", new { id });
         }
 
         [HttpPost]
