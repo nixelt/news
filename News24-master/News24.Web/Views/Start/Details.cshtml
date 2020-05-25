@@ -40,15 +40,17 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-2">
-                                    @if (item.User.AccountImage != null)
-                                    {
-                                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(item.User.AccountImage)" class="img rounded img-fluid" />
-                                    }
-                                    else
-                                    {
-                                        <img src="~/images/avatar.png" class="img rounded img-fluid" />
-                                    }
-                                    <p class="text-secondary text-center">@item.CommentDate.ToString("dd.MM.yyyy HH:mm")</p>
+                                    <div class="responsive-img" style="height: 90px; width: 100%" >
+                                        @if (item.User.AccountImage != null)
+                                        {
+                                            <img src="data:image/jpeg;base64,@Convert.ToBase64String(item.User.AccountImage)" class="img rounded img-fluid" />
+                                        }
+                                        else
+                                        {
+                                            <img src="~/images/avatar.png" class="img rounded img-fluid" />
+                                        }
+                                    </div>
+                                    <p class="text-secondary text-center" style="font-size: 0.75em">@item.CommentDate.ToString("dd.MM.yyyy HH:mm")</p>
                                 </div>
                                 <div class="col-md-10">
                                     <p>

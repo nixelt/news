@@ -33,10 +33,10 @@
                 @item.PublicationDate.ToString("dd.MM.yyyy HH:mm")
             </td>
             <td class="text-right">
-                @Html.ActionLink("Подробности", "Details", "Start", null, null, null, new { id = item.ArticleId, Area = "" }, new { @class = "btn btn-info" })
-                @Html.ActionLink("Изменить", "Edit", new { id = item.ArticleId }, new { @class = "btn btn-primary" })
-                @Html.ActionLink("Теги", "Index", "Tag", new { id = item.ArticleId }, new { @class = "btn btn-warning" })
-                @Html.ActionLink("Удалить", "Delete", new { id = item.ArticleId }, new { @class = "btn btn-danger" })
+                @Html.ActionLink("Подробности", "Details", "Start", null, null, null, new { id = item.ArticleId, Area = "" }, new { @class = "btn btn-info mt-1" })
+                @Html.ActionLink("Изменить", "Edit", new { id = item.ArticleId }, new { @class = "btn btn-primary mt-1" })
+                @Html.ActionLink("Теги", "Index", "Tag", new { id = item.ArticleId }, new { @class = "btn btn-warning mt-1" })
+                @Html.ActionLink("Удалить", "Delete", new { id = item.ArticleId }, new { @class = "btn btn-danger mt-1" })
 
             </td>
         </tr>

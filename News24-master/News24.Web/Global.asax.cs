@@ -50,32 +50,32 @@ namespace News24.Web
             var action = "Index";
 
             //// если это ошибки HTTP, а не моего кода, то для них свои представления
-            //if (ex is HttpException)
-            //{
-            //    switch (((HttpException)ex).GetHttpCode())
-            //    {
-            //        case 403:
-            //            action = "AccessDenied";
-            //            break;
-            //        case 404:
-            //            action = "NotFound";
-            //            break;
-            //        default:
-            //            action = "HttpError";
-            //            break;
-            //            // можно добавить свои методы контроллера для любых кодов ошибок
-            //    }
-            //}
-            //httpContext.ClearError();
-            //httpContext.Response.Clear();
-            //httpContext.Response.StatusCode = ex is HttpException ? ((HttpException)ex).GetHttpCode() : 500;
-            //httpContext.Response.TrySkipIisCustomErrors = true;
+            if (ex is HttpException)
+            {
+                switch (((HttpException)ex).GetHttpCode())
+                {
+                    case 403:
+                        action = "AccessDenied";
+                        break;
+                    case 404:
+                        action = "NotFound";
+                        break;
+                    default:
+                        action = "HttpError";
+                        break;
+                        // можно добавить свои методы контроллера для любых кодов ошибок
+                }
+            }
+            httpContext.ClearError();
+            httpContext.Response.Clear();
+            httpContext.Response.StatusCode = ex is HttpException ? ((HttpException)ex).GetHttpCode() : 500;
+            httpContext.Response.TrySkipIisCustomErrors = true;
 
-            //routeData.Values["controller"] = "Error";
-            //routeData.Values["action"] = action;
+            routeData.Values["controller"] = "Error";
+            routeData.Values["action"] = action;
 
-            //controller.ViewData.Model = new HandleErrorInfo(ex, currentController, currentAction);
-            //((IController)controller).Execute(new RequestContext(new HttpContextWrapper(httpContext), routeData));
+            controller.ViewData.Model = new HandleErrorInfo(ex, currentController, currentAction);
+            ((IController)controller).Execute(new RequestContext(new HttpContextWrapper(httpContext), routeData));
         }
     }
 }

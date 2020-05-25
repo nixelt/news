@@ -371,6 +371,23 @@ a, a:hover {
     }
 }
 
+.responsive-img {
+    position: relative;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.responsive-img img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+}
+
 .fh5co_news_img {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
