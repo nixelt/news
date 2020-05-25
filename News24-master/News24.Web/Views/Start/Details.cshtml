@@ -1,4 +1,6 @@
-﻿@using Microsoft.AspNet.Identity
+﻿@using System.Globalization
+@using Microsoft.AspNet.Identity
+@using News24.Model
 @model News24.Web.ViewModels.ArticleViewModel.ArticleDetailsViewModel
 @{
     ViewBag.Title = Model.Head;
@@ -18,7 +20,7 @@
                 <div class="overlay">
                     <div class="page-title">
                         <div class="d-flex justify-content-between">
-                            <span>@Model.PublicationDate.ToString("D")</span>
+                            <span>@Model.PublicationDate.ToString("dddd, d MMMM yyyy г.", CultureInfo.GetCultureInfo("ru-ru"))</span>
                             <div>
                                 <i class="fa fa-eye" aria-hidden="true"></i>
                                 @Model.Views

@@ -1,4 +1,5 @@
-﻿@model List<News24.Web.ViewModels.StartViewModels.ArticleViewModel>
+﻿@using System.Globalization
+@model List<News24.Web.ViewModels.StartViewModels.ArticleViewModel>
 <div>
     <div class="fh5co_heading fh5co_heading_border_bottom pt-3 py-2 mb-4">Последние обновления</div>
 </div>
@@ -12,7 +13,7 @@
         </div>
         <div class="col-8 paddding">
             @Html.ActionLink(item.Head, "Details", "Start", new { id = item.ArticleId }, htmlAttributes: new { @class = "most_fh5co_treding_font ", @style = "text-decoration:none; color:black;" })
-            <div class="most_fh5co_treding_font_123"> @item.PublicationDate.ToString("D")</div>
+            <div class="most_fh5co_treding_font_123"> @item.PublicationDate.ToString("dddd, d MMMM yyyy г.", CultureInfo.GetCultureInfo("ru-ru"))</div>
         </div>
     </div>
 }

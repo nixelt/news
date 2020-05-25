@@ -1,4 +1,5 @@
-﻿@using Microsoft.AspNetCore.Mvc.Rendering
+﻿@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Rendering
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
@@ -34,7 +35,7 @@
             <div class="row">
                 <div class="col-md-6 col-8 fh5co_mediya_center mr-auto">
                     <a href="#" class="color_fff fh5co_mediya_setting">
-                        <i class="fa fa-clock-o"></i>&nbsp;&nbsp;&nbsp;@DateTime.Now.ToString("D")
+                        <i class="fa fa-clock-o"></i>&nbsp;&nbsp;&nbsp;@DateTime.Now.ToString("dddd, d MMMM yyyy г.", CultureInfo.GetCultureInfo("ru-ru"))
                     </a>
                     <div class="d-inline-block fh5co_trading_posotion_relative">
                         <a href="#trend" class="treding_btn">В тренде</a>
@@ -95,9 +96,7 @@
     </div>
 
     <div class="container-fluid">
-        <div class="container">
             @RenderBody()
-        </div>
     </div>
 
     <div class="container-fluid fh5co_footer_bg pb-3">
@@ -105,7 +104,7 @@
             <div class="row">
                 <div class="col-12 spdp_right py-5"><img src="~/images/white_logo.png" alt="img" class="footer_logo" /></div>
                 <div class="clearfix"></div>
-                <div class="col-12 col-md-4 col-lg-3">
+                <div class="col-12 col-md-6 ">
                     <div class="footer_main_title py-3">О нас<a name="about"></a></div>
                     <div class="footer_sub_about pb-3">
                         Использование любых материалов, размещённых на сайте, разрешается при условии ссылки на News24.

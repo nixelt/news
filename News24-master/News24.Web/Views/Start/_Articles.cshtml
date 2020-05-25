@@ -1,9 +1,11 @@
 ﻿@model News24.Web.ViewModels.StartViewModels.IndexViewModel
+@using System.Text.RegularExpressions
 @using News24.Web.Helpers
 @if (Model.Articles.Count == 0)
 {
     <p>Новостей нет</p>
 }
+
 @foreach (var item in Model.Articles)
 {
     <div class="row pb-4">
@@ -25,13 +27,14 @@
                 @item.PublicationDate.ToString("dd.MM.yyyy HH:mm")
             </a>
             <div class="fh5co_consectetur">
-                @Html.Raw(item.Body.Substring(0, item.Body.Length > 200 ? 200 : item.Body.Length))
+                @(Regex.Replace(item.Body.Substring(0, item.Body.Length > 200 ? 200 : item.Body.Length), @"<[^>]*>", String.Empty))
                 ...
             </div>
 
         </div>
     </div>
 }
+
 <div class="row mx-0 animate-box" data-animate-effect="fadeInUp">
     <div class="col-12 text-center pb-4 pt-4">
 

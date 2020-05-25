@@ -1,4 +1,5 @@
-﻿@model List<News24.Web.ViewModels.StartViewModels.ArticleViewModel>
+﻿@using System.Globalization
+@model List<News24.Web.ViewModels.StartViewModels.ArticleViewModel>
 <a name="trend"></a>
 <div class="container animate-box">
     <div>
@@ -15,7 +16,7 @@
 
                         <a href="@Url.Action("Details" ,"Start", new { id =item.ArticleId})" class="d-block fh5co_small_post_heading"><span class="">@item.Head</span></a>
                         <div class="c_g">
-                            <i class="fa fa-clock-o"></i> @item.PublicationDate.ToString("D")
+                            <i class="fa fa-clock-o"></i>@item.PublicationDate.ToString("dddd, d MMMM yyyy г.", CultureInfo.GetCultureInfo("ru-ru"))
                         </div>
                     </div>
                 </div>

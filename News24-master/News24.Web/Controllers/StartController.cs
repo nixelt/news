@@ -85,29 +85,7 @@ namespace News24.Web.Controllers
             var articleViewModels = Mapper.Map<IEnumerable<Article>, List<ArticleViewModel>>(articles);
             return View(articleViewModels);
         }
-
-        //public ActionResult Autocomplete(string term)
-        //{
-        //    try
-        //    {
-        //        //var model = _articleService.GetArticles() // your data here
-        //        //    .Where(p => p.Tags.ForEach(x=>x.Value.Contains(term)))
-        //        //    .Take(10)
-        //        //    .Select(p => new
-        //        //    {
-        //        //// jQuery UI needs the label property to function 
-        //        //    label = p.Article.Head.Trim()
-        //        //    });
-
-        //        //// Json returns [{"label":value}]
-        //        //return Json(model, JsonRequestBehavior.AllowGet);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //          return Json("{'ex':'Exception'}");
-        //    }
-        //}
-
+        
         [HttpGet]
         public ActionResult Details(int id)
         {
@@ -130,7 +108,7 @@ namespace News24.Web.Controllers
         public ActionResult GetTags()
         {
             var tags = _tagService.GetDistinctTags();
-            var model = tags.Select(x => new KeyValuePair<int, string>(x.TagId, x.Value));
+            var model = tags.Select(x => new KeyValuePair<int, string>(x.TagId, x.Value)).Take(15);
             return PartialView("_LastPosted", model);
         }
 

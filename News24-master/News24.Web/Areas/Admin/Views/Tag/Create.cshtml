@@ -17,7 +17,7 @@
             <div>
                 @Html.ValidationSummary(true, string.Empty, new { @class = "text-danger" })
                 <div class="form-group">
-                    <p>@Html.LabelFor(model => model.Value, new { @class = "col" }) (Чтобы добавить несколько, перечисляйте через запятую "," )</p>
+                    <p>Теги (перечисляйте через запятую ",")</p>
                     
                     <div class="col-md-12">
                         @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })

@@ -32,12 +32,10 @@
                         @Html.Partial("_Articles", Model)
                     </div>
                 </div>
-
-                <div class="col-md-3 animate-box" data-animate-effect="fadeInRight">
+                <div class="col-md-4 animate-box" data-animate-effect="fadeInRight">
                     @Html.Partial("_Categories", Model.Categories)
                     @Html.Partial("_Tags", Model.Tags)
                     @Html.Action("GetMostPopular", "Start")
-
                 </div>
             </div>
         </div>
